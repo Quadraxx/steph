@@ -4,8 +4,28 @@ import subprocess
 import psutil
 from pathlib import Path
 
+from ..commands.network import NetworkCommands
+from ..commands.process import ProcessCommands
+from ..commands.service import ServiceCommands
+
 
 class CommandExecutor:
+    def __init__(self, plugin_manager=None):
+        self.plugin_manager = plugin_manager
+        self.extras = {}
+        self._load_extra_commands()
+
+    def _load_extra_commands(self):
+        for cmd_cls in [NetworkCommands, ProcessCommands, ServiceCommands]:
+            instance = cmd_cls()
+            self.extras.update(instance.get_commands())
+
+    def reload_extras(self):
+        self.extras = {}
+        self._load_extra_commands()
+        if self.plugin_manager:
+            self.extras.update(self.plugin_manager.commands)
+
     def execute(self, command_type: str, params: dict) -> str:
         handlers = {
             "list_files": self._list_files,
@@ -19,9 +39,21 @@ class CommandExecutor:
             "open_file": self._open_file,
         }
         handler = handlers.get(command_type)
-        if not handler:
-            return f"Unknown command: {command_type}"
-        return handler(params)
+        if handler:
+            return handler(params)
+        extra = self.extras.get(command_type)
+        if extra:
+            return extra(params)
+        return f"Unknown command: {command_type}"
+
+    def list_commands(self) -> list:
+        base = [
+            "list_files", "move_file", "copy_file", "delete_file",
+            "create_folder", "run_command", "get_system_info",
+            "find_large_files", "open_file",
+        ]
+        extra = list(self.extras.keys())
+        return base + extra
 
     def _list_files(self, params: dict) -> str:
         path = params.get("path", ".")
