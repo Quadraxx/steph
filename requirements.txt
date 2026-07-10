@@ -17,3 +17,6 @@ requests>=2.31.0
 # API & Web Dashboard
 fastapi>=0.100.0
 uvicorn>=0.23.0
+
+# Security
+cryptography>=41.0.0

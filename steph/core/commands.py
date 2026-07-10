@@ -7,11 +7,14 @@ from pathlib import Path
 from ..commands.network import NetworkCommands
 from ..commands.process import ProcessCommands
 from ..commands.service import ServiceCommands
+from ..api_premium import WeatherAPI, CurrencyAPI, CryptoAPI
+from .credentials import CredentialManager
 
 
 class CommandExecutor:
-    def __init__(self, plugin_manager=None):
+    def __init__(self, plugin_manager=None, credentials: CredentialManager = None):
         self.plugin_manager = plugin_manager
+        self.credentials = credentials or CredentialManager()
         self.extras = {}
         self._load_extra_commands()
 
@@ -19,6 +22,34 @@ class CommandExecutor:
         for cmd_cls in [NetworkCommands, ProcessCommands, ServiceCommands]:
             instance = cmd_cls()
             self.extras.update(instance.get_commands())
+        self._load_premium_commands()
+
+    def _load_premium_commands(self):
+        weather = WeatherAPI(api_key=self.credentials.get("weather") or "")
+        currency = CurrencyAPI(api_key=self.credentials.get("currency") or "")
+        crypto = CryptoAPI(api_key=self.credentials.get("crypto") or "")
+
+        if weather.available:
+            self.extras["get_weather"] = lambda p: weather.get_weather(
+                p.get("city", "Istanbul"), p.get("country", "")
+            )
+            self.extras["get_forecast"] = lambda p: weather.get_forecast(
+                p.get("city", "Istanbul")
+            )
+        if currency.available:
+            self.extras["get_exchange_rate"] = lambda p: currency.get_rate(
+                p.get("from", "USD"), p.get("to", "TRY")
+            )
+            self.extras["get_rates"] = lambda p: currency.get_rates(
+                p.get("base", "TRY")
+            )
+        if crypto.available or True:
+            self.extras["get_crypto_price"] = lambda p: crypto.get_price(
+                p.get("coin", "bitcoin"), p.get("currency", "usd")
+            )
+            self.extras["get_top_crypto"] = lambda p: crypto.get_top(
+                p.get("limit", 10), p.get("currency", "usd")
+            )
 
     def reload_extras(self):
         self.extras = {}
