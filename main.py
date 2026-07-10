@@ -8,11 +8,10 @@ from steph.voice.tts import TextToSpeech
 
 def print_banner():
     banner = """
-    ╔══════════════════════════════╗
-    ║     STEPH v0.1              ║
-    ║  AI Local Intelligent       ║
-    ║  System Assistant           ║
-    ╚══════════════════════════════╝
+    ╔═══════════════════════════╗
+    ║     STEPH v0.1           ║
+    ║   Your AI Commander      ║
+    ╚═══════════════════════════╝
     """
     print(banner)
 
