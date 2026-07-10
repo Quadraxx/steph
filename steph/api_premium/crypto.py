@@ -57,7 +57,7 @@ class CryptoAPI:
                 name = coin["name"]
                 price = coin["current_price"]
                 change = coin.get("price_change_percentage_24h", 0)
-                arrow = "📈" if change and change > 0 else "📉"
+                arrow = "(+)" if change and change > 0 else "(-)"
                 change_str = f"%{change:.1f}" if change else "N/A"
                 lines.append(f"  {i}. {name:15} {price:>10.2f} {arrow} {change_str}")
             return "\n".join(lines)
