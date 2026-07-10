@@ -43,10 +43,46 @@ class WebDashboard:
 
         @app.get("/api/system")
         async def system():
-            if not self.assistant:
-                return JSONResponse({"error": "No assistant"}, status_code=503)
-            result = self.assistant.process("sistem bilgisi ver")
-            return JSONResponse({"data": result})
+            try:
+                import psutil
+                cpu = psutil.cpu_percent(interval=0.3)
+                mem = psutil.virtual_memory()
+                disk = psutil.disk_usage("/")
+                uptime_sec = int(psutil.boot_time())
+                from datetime import datetime
+                delta = datetime.now() - datetime.fromtimestamp(uptime_sec)
+                d = delta.days
+                h = delta.seconds // 3600
+                m = (delta.seconds // 60) % 60
+                return JSONResponse({
+                    "data": (
+                        f"CPU: {cpu}%\n"
+                        f"RAM: {mem.used // 1024**3}GB / {mem.total // 1024**3}GB ({mem.percent}%)\n"
+                        f"Disk: {disk.used // 1024**3}GB / {disk.total // 1024**3}GB ({disk.percent}%)\n"
+                        f"Uptime: {d}d {h}h {m}m"
+                    )
+                })
+            except Exception as e:
+                return JSONResponse({"data": f"Error: {e}"})
+
+        @app.get("/api/stats")
+        async def stats():
+            try:
+                import psutil
+                cpu = psutil.cpu_percent(interval=0.3)
+                mem = psutil.virtual_memory()
+                disk = psutil.disk_usage("/")
+                uptime_sec = int(psutil.boot_time())
+                from datetime import datetime
+                delta = datetime.now() - datetime.fromtimestamp(uptime_sec)
+                return JSONResponse({
+                    "cpu": f"{cpu}%",
+                    "ram": f"{mem.used // 1024**3}GB / {mem.total // 1024**3}GB",
+                    "disk": f"{disk.used // 1024**3}GB / {disk.total // 1024**3}GB",
+                    "uptime": f"{delta.days}d {delta.seconds//3600}h {(delta.seconds//60)%60}m"
+                })
+            except Exception as e:
+                return JSONResponse({"error": str(e)})
 
         log.info(f"Dashboard starting on http://{host}:{port}")
         import threading
@@ -162,15 +198,12 @@ async function send() {{
 
 async function refreshStats() {{
   try {{
-    const res = await fetch('/api/system');
+    const res = await fetch('/api/stats');
     const data = await res.json();
-    const lines = data.data.split('\\n');
-    lines.forEach(l => {{
-      if (l.includes('CPU')) document.getElementById('cpu').textContent = l.split('%')[0].split(' ').pop() + '%';
-      if (l.includes('RAM')) document.getElementById('ram').textContent = l.split('GB')[0].split(' ').pop() + 'GB';
-      if (l.includes('Disk')) document.getElementById('disk').textContent = l.split('GB')[0].split(' ').pop() + 'GB';
-      if (l.includes('Uptime')) document.getElementById('uptime').textContent = l.split(': ')[1] || '0';
-    }});
+    if (data.cpu) document.getElementById('cpu').textContent = data.cpu;
+    if (data.ram) document.getElementById('ram').textContent = data.ram.split('/')[0].trim();
+    if (data.disk) document.getElementById('disk').textContent = data.disk.split('/')[0].trim();
+    if (data.uptime) document.getElementById('uptime').textContent = data.uptime;
   }} catch(e) {{}}
 }}
 
