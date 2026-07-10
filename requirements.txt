@@ -1,4 +1,4 @@
-# ALISA - AI Local Intelligent System Assistant
+# STEPH - AI Local Intelligent System Assistant
 # Core
 openai>=1.0.0
 

@@ -1,15 +1,15 @@
 import argparse
 import readline
 import sys
-from alisa.core.assistant import Assistant
-from alisa.voice.stt import SpeechRecognizer
-from alisa.voice.tts import TextToSpeech
+from steph.core.assistant import Assistant
+from steph.voice.stt import SpeechRecognizer
+from steph.voice.tts import TextToSpeech
 
 
 def print_banner():
     banner = """
     ╔══════════════════════════════╗
-    ║     ALISA v0.1              ║
+    ║     STEPH v0.1              ║
     ║  AI Local Intelligent       ║
     ║  System Assistant           ║
     ╚══════════════════════════════╝
@@ -18,7 +18,7 @@ def print_banner():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="ALISA - AI Local Intelligent System Assistant")
+    parser = argparse.ArgumentParser(description="STEPH - AI Local Intelligent System Assistant")
     parser.add_argument("--mode", choices=["local", "cloud"], default="local", help="LLM mode")
     parser.add_argument("--api-key", help="OpenAI API key (for cloud mode)")
     parser.add_argument("--base-url", help="Custom API base URL")
@@ -69,7 +69,7 @@ def main():
                 continue
 
             response = assistant.process(user_input)
-            print(f"\nALISA: {response}\n")
+            print(f"\nSTEPH: {response}\n")
 
             if tts:
                 tts.speak(response.split("\n")[0])

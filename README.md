@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=220&section=header&text=ALISA&fontSize=80&fontColor=fff&animation=fadeIn" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=220&section=header&text=STEPH&fontSize=80&fontColor=fff&animation=fadeIn" width="100%"/>
 
-  <h1>🤖 ALISA</h1>
+  <h1>🤖 STEPH</h1>
   <h3>AI-Powered System Management Platform</h3>
   <p><i>Bir sonraki işletim sisteminiz. AI-native, cloud-connected, her yerden yönetin.</i></p>
 
@@ -49,13 +49,13 @@
 
 ## 🎯 Vizyon
 
-ALISA, bilgisayarınızı yönetme şeklinizi kökten değiştiren **AI-native bir platformdur**. Geleneksel işletim sistemi arayüzlerinin ötesine geçerek, doğal dil ile bilgisayarınızı yönetmenizi sağlar.
+STEPH, bilgisayarınızı yönetme şeklinizi kökten değiştiren **AI-native bir platformdur**. Geleneksel işletim sistemi arayüzlerinin ötesine geçerek, doğal dil ile bilgisayarınızı yönetmenizi sağlar.
 
 > *"İşletim sisteminin yeni dili: Doğal Dil"*
 
-### Neden ALISA?
+### Neden STEPH?
 
-| Problem | ALISA Çözümü |
+| Problem | STEPH Çözümü |
 |---------|--------------|
 | Karmaşık menüler, uzun tıklama yolları | Tek cümle ile işlem |
 | Script yazmayı bilmeyenler için otomasyon zor | Doğal dil ile otomasyon |
@@ -193,8 +193,8 @@ sequenceDiagram
 
 ```bash
 # Clone
-git clone https://github.com/Quadraxx/alisa.git
-cd alisa
+git clone https://github.com/Quadraxx/steph.git
+cd steph
 
 # Setup
 python -m venv venv
@@ -216,7 +216,7 @@ ollama pull mistral
 
 ## ☁️ SaaS Platform
 
-ALISA'yı bir SaaS olarak da kullanabilirsiniz. Bulut altyapımız sayesinde:
+STEPH'yı bir SaaS olarak da kullanabilirsiniz. Bulut altyapımız sayesinde:
 
 ### 🆓 Free Tier
 - 1 cihaz bağlantısı
@@ -246,13 +246,13 @@ ALISA'yı bir SaaS olarak da kullanabilirsiniz. Bulut altyapımız sayesinde:
 
 ## 📊 API
 
-ALISA tamamen API-first mimari ile inşa edilmiştir. Her özellik bir API endpoint'i olarak sunulur.
+STEPH tamamen API-first mimari ile inşa edilmiştir. Her özellik bir API endpoint'i olarak sunulur.
 
 ```python
 import requests
 
 API_KEY = "your-api-key"
-BASE_URL = "https://api.alisa.dev/v1"
+BASE_URL = "https://api.steph.dev/v1"
 
 # Bilgisayarına komut gönder
 response = requests.post(
@@ -283,7 +283,7 @@ print(response.json())
 
 ## 🔐 Güvenlik
 
-Güvenlik, ALISA'nın temel tasarım prensibidir.
+Güvenlik, STEPH'nın temel tasarım prensibidir.
 
 - **🔒 End-to-End Encryption**: Tüm komutlar ve veriler şifrelenir
 - **🛡️ Sandboxed Execution**: Komutlar izole ortamda çalıştırılır
@@ -298,7 +298,7 @@ Güvenlik, ALISA'nın temel tasarım prensibidir.
 
 ```mermaid
 gantt
-    title ALISA Development Roadmap
+    title STEPH Development Roadmap
     dateFormat  YYYY-MM-DD
     section Core
     CLI MVP                    :done, 2026-07-01, 2026-07-10
@@ -321,7 +321,7 @@ gantt
 
 ## 🤝 Katkıda Bulunun
 
-ALISA açık kaynak bir projedir ve katkılarınızı bekler!
+STEPH açık kaynak bir projedir ve katkılarınızı bekler!
 
 ```
 1. Fork 🍴
@@ -345,23 +345,23 @@ MIT License - Detaylar için [LICENSE](LICENSE) dosyasına bakın.
   <br/><br/>
 
   <p>
-    <a href="https://github.com/Quadraxx/alisa/issues/new">🐛 Hata Bildir</a>
+    <a href="https://github.com/Quadraxx/steph/issues/new">🐛 Hata Bildir</a>
     ·
-    <a href="https://github.com/Quadraxx/alisa/discussions/new?category=ideas">💡 Fikir Öner</a>
+    <a href="https://github.com/Quadraxx/steph/discussions/new?category=ideas">💡 Fikir Öner</a>
     ·
-    <a href="https://github.com/Quadraxx/alisa/discussions">💬 Tartışma</a>
+    <a href="https://github.com/Quadraxx/steph/discussions">💬 Tartışma</a>
   </p>
 
   <p>
     <a href="https://github.com/Quadraxx">
-      <img src="https://img.shields.io/badge/Quadraxx-ALISA-8A2BE2?style=for-the-badge"/>
+      <img src="https://img.shields.io/badge/Quadraxx-STEPH-8A2BE2?style=for-the-badge"/>
     </a>
   </p>
 
   <p>
-    <img src="https://img.shields.io/github/stars/Quadraxx/alisa?style=social"/>
-    <img src="https://img.shields.io/github/forks/Quadraxx/alisa?style=social"/>
-    <img src="https://img.shields.io/github/watchers/Quadraxx/alisa?style=social"/>
+    <img src="https://img.shields.io/github/stars/Quadraxx/steph?style=social"/>
+    <img src="https://img.shields.io/github/forks/Quadraxx/steph?style=social"/>
+    <img src="https://img.shields.io/github/watchers/Quadraxx/steph?style=social"/>
   </p>
 
   <p>
