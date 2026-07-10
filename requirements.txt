@@ -1,0 +1,15 @@
+# ALISA - AI Local Intelligent System Assistant
+# Core
+openai>=1.0.0
+
+# Voice (opsiyonel - ses tanıma için)
+SpeechRecognition>=3.10.0
+pyttsx3>=2.90
+pyaudio>=0.2.11
+
+# System
+psutil>=5.9.0
+pywin32>=306
+
+# LLM integration (local)
+requests>=2.31.0
